@@ -1,21 +1,48 @@
 package com.politicosjpa;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity
+
 @Embeddable
 public class Direccion {
-    @Column
     private String tipoVia;
-    @Id
+
     private String nombreVia;
     @Column
     private int numero;
 
+    public String getTipoVia() {
+        return tipoVia;
+    }
 
+    public void setTipoVia(String tipoVia) {
+        this.tipoVia = tipoVia;
+    }
+
+    public String getNombreVia() {
+        return nombreVia;
+    }
+
+    public void setNombreVia(String nombreVia) {
+        this.nombreVia = nombreVia;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public Direccion() {
+    }
+
+    public Direccion(String tipoVia, String nombreVia, int numero) {
+        this.tipoVia = tipoVia;
+        this.nombreVia = nombreVia;
+        this.numero = numero;
+    }
 }
 
 
