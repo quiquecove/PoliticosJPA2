@@ -1,17 +1,21 @@
 package com.politicosjpa;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 public class Afiliado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid2", strategy = GenerationType.AUTO)
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(columnDefinition = "CHAR(36)")
     private String dni;
 
 
     @ManyToOne
-    @JoinColumn(name = "partido", referencedColumnName = "nombre")
+    @JoinColumn(name = "nombre")
     private Partido partido;
 
     @Column

@@ -1,15 +1,18 @@
 package com.politicosjpa;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 //add unique
 @Entity
 public class Politico {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid2", strategy = GenerationType.AUTO)
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(columnDefinition = "CHAR(36)")
     private String dni;
 
-    @Column
+
     private String nombreApe;
 
     @Column
@@ -18,7 +21,7 @@ public class Politico {
     @Column
     private String estudios;
 
-    @OneToOne(mappedBy = "nombre")
+    @OneToOne(mappedBy = "presidente")
     private Partido partido;  // Agregamos la relación a la clase Partido
 
 
@@ -55,5 +58,11 @@ public class Politico {
         this.estudios = estudios;
     }
 
+    public Partido getPartido() {
+        return partido;
+    }
 
+    public void setPartido(Partido partido) {
+        this.partido = partido;
+    }
 }

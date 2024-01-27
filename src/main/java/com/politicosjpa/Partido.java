@@ -6,25 +6,26 @@ import java.util.List;
 
 @Entity
 public class Partido {
+
     @Id
-    private String nombre;
+    @JoinColumn(name = "partido", referencedColumnName = "partido")
+    private String nombreApe;
 
     @Column
     private int escannos;
 
     @OneToOne
-    @JoinColumn(name = "fk_id_presidente", referencedColumnName = "nombreApe")
     private Politico presidente;
 
     @OneToMany(mappedBy = "partido")
     private List<Afiliado> afiliados;
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreApe() {
+        return nombreApe;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreApe(String nombre) {
+        this.nombreApe = nombre;
     }
 
     public int getEscannos() {
@@ -55,7 +56,7 @@ public class Partido {
     }
 
     public Partido(String nombre, int escannos, Politico presidente, List<Afiliado> afiliados) {
-        this.nombre = nombre;
+        this.nombreApe = nombre;
         this.escannos = escannos;
         this.presidente = presidente;
         this.afiliados = afiliados;
