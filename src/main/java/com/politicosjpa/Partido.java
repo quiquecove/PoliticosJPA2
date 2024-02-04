@@ -9,23 +9,23 @@ public class Partido {
 
     @Id
     @JoinColumn(name = "partido", referencedColumnName = "partido")
-    private String nombreApe;
+    private String nombre;
 
     @Column
     private int escannos;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Politico presidente;
 
-    @OneToMany(mappedBy = "partido")
+    @OneToMany(mappedBy = "partido", cascade = CascadeType.PERSIST)
     private List<Afiliado> afiliados;
 
-    public String getNombreApe() {
-        return nombreApe;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreApe(String nombre) {
-        this.nombreApe = nombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getEscannos() {
@@ -56,7 +56,7 @@ public class Partido {
     }
 
     public Partido(String nombre, int escannos, Politico presidente, List<Afiliado> afiliados) {
-        this.nombreApe = nombre;
+        this.nombre = nombre;
         this.escannos = escannos;
         this.presidente = presidente;
         this.afiliados = afiliados;

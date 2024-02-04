@@ -21,9 +21,12 @@ public class Politico {
     @Column
     private String estudios;
 
-    @OneToOne(mappedBy = "presidente")
+    @OneToOne(mappedBy = "presidente",cascade = CascadeType.PERSIST)
     private Partido partido;  // Agregamos la relación a la clase Partido
 
+    public Politico() {
+
+    }
 
 
     public String getDni() {
@@ -63,6 +66,13 @@ public class Politico {
     }
 
     public void setPartido(Partido partido) {
+        this.partido = partido;
+    }
+
+    public Politico(String nombreApe, int edad, String estudios, Partido partido) {
+        this.nombreApe = nombreApe;
+        this.edad = edad;
+        this.estudios = estudios;
         this.partido = partido;
     }
 }

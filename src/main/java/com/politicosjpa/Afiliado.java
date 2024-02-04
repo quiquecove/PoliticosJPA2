@@ -14,7 +14,7 @@ public class Afiliado {
     private String dni;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "nombre")
     private Partido partido;
 
@@ -32,8 +32,7 @@ public class Afiliado {
     public Afiliado() {
     }
 
-    public Afiliado(String dni, Partido partido, int salarioAnual, int aportacionAnual, CuentaBancaria cuentaBancaria, Direccion direccion) {
-        this.dni = dni;
+    public Afiliado(Partido partido, int salarioAnual, int aportacionAnual, CuentaBancaria cuentaBancaria, Direccion direccion) {
         this.partido = partido;
         this.salarioAnual = salarioAnual;
         this.aportacionAnual = aportacionAnual;
@@ -88,4 +87,17 @@ public class Afiliado {
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
+
+    @Override
+    public String toString() {
+        return "Afiliado{" +
+                "dni='" + dni + '\'' +
+                ", partido=" + partido +
+                ", salarioAnual=" + salarioAnual +
+                ", aportacionAnual=" + aportacionAnual +
+                ", cuentaBancaria=" + cuentaBancaria +
+                ", direccion=" + direccion +
+                '}';
+    }
 }
+
