@@ -87,6 +87,44 @@ public class PoliticosJpaApplication {
         }
 
 
+        // Crear un objeto Partido
+        Partido nuevoPartido = new Partido();
+        nuevoPartido.setNombre("Nuevo Partido");
+        nuevoPartido.setPresidente(new Politico("Nombre Presidente", 50, "Estudios Presidente", nuevoPartido));
+        nuevoPartido.setEscannos(50);
+
+// Persistir el Partido en la base de datos
+        em.getTransaction().begin();
+        em.persist(nuevoPartido);
+        em.getTransaction().commit();
+        System.out.println("Nuevo partido creado: " + nuevoPartido.getNombre());
+
+
+// Buscar el partido que deseas actualizar por su nombre
+        String nombrePartidoActualizar = "PP";
+        Partido partidoActualizar = em.createQuery("SELECT p FROM Partido p WHERE p.nombre = :nombre", Partido.class)
+                .setParameter("nombre", nombrePartidoActualizar)
+                .getSingleResult();
+
+// Actualizar el partido
+        em.getTransaction().begin();
+        partidoActualizar.setEscannos(150); // Actualiza el número de escaños
+        em.getTransaction().commit();
+        System.out.println("Partido actualizado: " + partidoActualizar.getNombre());
+
+
+// Buscar el partido que deseas eliminar por su nombre
+        String nombrePartidoEliminar = "Restar";
+        Partido partidoEliminar = em.createQuery("SELECT p FROM Partido p WHERE p.nombre = :nombre", Partido.class)
+                .setParameter("nombre", nombrePartidoEliminar)
+                .getSingleResult();
+
+// Eliminar el partido
+        em.getTransaction().begin();
+        em.remove(partidoEliminar);
+        em.getTransaction().commit();
+        System.out.println("Partido eliminado: " + nombrePartidoEliminar);
+
 
         //borrar partido pp
 
@@ -99,12 +137,8 @@ public class PoliticosJpaApplication {
 //        String nombrePartidoEliminar = "Restar";
 //        Partido partidoEliminar = em.find(Partido.class, nombrePartidoEliminar);
 
-        //eso es todo?
-        //y te la saco para mear tambien??
 //
         //em.remove(partidoEliminar);
-
-
 
 
 //            System.out.println("Partido eliminado: " + nombrePartidoEliminar);
